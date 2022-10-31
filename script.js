@@ -1,4 +1,6 @@
 const bookContainer = document.querySelector(".book-container");
+const addBookBtn = document.querySelector("#add-book-btn");
+const modal = document.querySelector(".modal");
 
 let myLibrary = [];
 
@@ -88,6 +90,11 @@ const book2 = new Book("Book2", "Book2", 2, true);
 addBookToLibrary(book2);
 
 renderBooks();
+
+// Display form when add book button is clicked
+addBookBtn.addEventListener("click", () => {
+    modal.classList.add("active");
+})
 
 // Event delegation for buttons in book
 bookContainer.addEventListener("click", (e) => {
