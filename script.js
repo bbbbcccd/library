@@ -79,3 +79,5 @@ addBookToLibrary(book1);
 
 const book2 = new Book("Book2", "Book2", 2, true);
 addBookToLibrary(book2);
+
+renderBooks();
