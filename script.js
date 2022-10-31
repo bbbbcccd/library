@@ -13,20 +13,24 @@ function Book(title, author, pages, isRead) {
 // Toggle isRead property
 Book.prototype.changeRead = function() {
     this.isRead = !this.isRead;
+    renderBooks();
 }
 
 // Add book to last index of myLibrary
 function addBookToLibrary(book) {
     myLibrary.push(book);
+    renderBooks();
 }
 
 // Remove book from myLibrary based on its index
 function removeBookFromLibrary(index) {
     myLibrary.splice(index, 1);
+    renderBooks();
 }
 
 // Render myLibrary on screen
 function renderBooks() {
+    bookContainer.innerHTML = '';
     myLibrary.forEach(displayBook);
 }
 
@@ -39,6 +43,7 @@ function displayBook(book) {
 function createBookHTML(book) {
     const bookDiv = document.createElement("div");
     bookDiv.classList.add("book");
+    bookDiv.setAttribute("data-index", myLibrary.indexOf(book));
 
     const titleHeader = document.createElement("h2");
     titleHeader.textContent = book.title;
@@ -47,16 +52,17 @@ function createBookHTML(book) {
 
     const authorPara = document.createElement("p");
     authorPara.classList.add("author");
-    authorPara.textContent = "by: " + book.author;
+    authorPara.textContent = book.author;
     bookDiv.appendChild(authorPara);
 
 
     const pagesPara = document.createElement("p");
     pagesPara.classList.add("pages");
-    pagesPara.textContent = "Pages: " + book.pages;
+    pagesPara.textContent = book.pages;
     bookDiv.appendChild(pagesPara);
 
     const isReadBtn = document.createElement("button");
+    isReadBtn.classList.add("is-read-btn");
     if (book.isRead) {
         isReadBtn.classList.add("read");
         isReadBtn.textContent = "Completed";
@@ -67,6 +73,7 @@ function createBookHTML(book) {
     bookDiv.appendChild(isReadBtn);
 
     const removeBtn = document.createElement("button");
+    removeBtn.classList.add("remove-btn");
     removeBtn.textContent = "Remove book from library";
     bookDiv.appendChild(removeBtn);
 
@@ -81,3 +88,16 @@ const book2 = new Book("Book2", "Book2", 2, true);
 addBookToLibrary(book2);
 
 renderBooks();
+
+// Event delegation for buttons in book
+bookContainer.addEventListener("click", (e) => {
+    const el = e.target;
+    const classes = [...el.classList];
+
+    if (classes.includes("remove-btn")) {
+        removeBookFromLibrary(el.parentNode.getAttribute("data-index"));
+    } else if (classes.includes("is-read-btn")) {
+        let bookIndex = el.parentNode.getAttribute("data-index");
+        myLibrary[bookIndex].changeRead();
+    }
+});

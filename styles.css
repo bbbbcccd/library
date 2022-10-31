@@ -25,8 +25,64 @@ h1 {
     border-radius: 4rem;
 }
 
-#add-book-btn:active {
+button:active {
     transform: scale(0.98);
+}
+
+.book-container {
+    padding: 1rem 3rem;
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(100px, 250px));
+    grid-auto-rows: 250px;
+    gap: 1rem;
+}
+
+.book-container .book {
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    border: 1px solid black;
+}
+
+.book h2 {
+    margin: 0;
+    text-align: center;
+}
+
+.book p {
+    margin: 0;
+}
+
+.book p:first-of-type::before {
+    content: "Author: ";
+    color: #44403c;
+    font-style: italic;
+}
+
+.book p:last-of-type::after {
+    content: " pages"
+}
+
+.book p:last-of-type {
+    flex: 1;
+}
+
+.book button {
+    font-weight: 900;
+    color: #f1f5f9;
+    padding: 0.5rem;
+    border: none;
+    border-radius: 4rem;
+}
+
+.book button.remove-btn,
+.book button.not-read {
+    background-color: #f87171;
+}
+
+.book button.read {
+    background-color: #84cc16;
 }
 
 .modal {
