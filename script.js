@@ -47,7 +47,7 @@ function createBookHTML(book) {
 
     const authorPara = document.createElement("p");
     authorPara.classList.add("author");
-    authorPara.textContent = book.author;
+    authorPara.textContent = "by: " + book.author;
     bookDiv.appendChild(authorPara);
 
 
