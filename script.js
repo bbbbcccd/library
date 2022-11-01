@@ -132,7 +132,6 @@ formBtn.addEventListener("click", createBookfromForm);
 
 function createBookfromForm(e) {
     e.preventDefault();
-    const form = e.target.parentNode;
     if (!form.checkValidity()) {
         form.reportValidity();
     } else {
