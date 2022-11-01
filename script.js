@@ -20,6 +20,14 @@ Book.prototype.changeRead = function() {
     renderBooks();
 }
 
+// Render myLibrary on screen
+function renderBooks() {
+    bookContainer.innerHTML = '';
+    myLibrary.forEach(displayBook);
+}
+
+renderBooks();
+
 // Add book to last index of myLibrary
 function addBookToLibrary(book) {
     myLibrary.push(book);
@@ -30,12 +38,6 @@ function addBookToLibrary(book) {
 function removeBookFromLibrary(index) {
     myLibrary.splice(index, 1);
     renderBooks();
-}
-
-// Render myLibrary on screen
-function renderBooks() {
-    bookContainer.innerHTML = '';
-    myLibrary.forEach(displayBook);
 }
 
 // Append book HTML to book container
@@ -83,15 +85,6 @@ function createBookHTML(book) {
 
     return bookDiv;
 }
-
-// Create a book and adding it to myLibrary
-const book1 = new Book("Book1", "Book1", 1, false);
-addBookToLibrary(book1);
-
-const book2 = new Book("Book2", "Book2", 2, true);
-addBookToLibrary(book2);
-
-renderBooks();
 
 // Display form when add book button is clicked
 addBookBtn.addEventListener("click", () => {
