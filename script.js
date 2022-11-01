@@ -1,6 +1,7 @@
 const bookContainer = document.querySelector(".book-container");
 const addBookBtn = document.querySelector("#add-book-btn");
 const modal = document.querySelector(".modal");
+const form = modal.querySelector("form");
 const formBtn = document.querySelector("#form-btn");
 
 let myLibrary = [];
@@ -95,7 +96,21 @@ renderBooks();
 // Display form when add book button is clicked
 addBookBtn.addEventListener("click", () => {
     modal.classList.add("active");
-})
+    modal.addEventListener("keydown", removeModal);
+});
+
+// Allow user to close modal using ESC key
+function removeModal(e) {
+    if (e.key === "Escape") {
+        closeModal();
+    }
+}
+
+// Close modal and reset form 
+function closeModal() {
+    form.reset();
+    modal.classList.remove("active");
+}
 
 // Event delegation for buttons in book
 bookContainer.addEventListener("click", (e) => {
@@ -110,11 +125,11 @@ bookContainer.addEventListener("click", (e) => {
     }
 });
 
-formBtn.addEventListener("click", createBookfromForm);
-
-// Check validity of form
+// On click, check validity of form
 // Create new book from form data and add to myLibrary
 // Reset the form and modal
+formBtn.addEventListener("click", createBookfromForm);
+
 function createBookfromForm(e) {
     e.preventDefault();
     const form = e.target.parentNode;
@@ -129,7 +144,6 @@ function createBookfromForm(e) {
         const newBook = new Book(title, author, pages, isRead);
         addBookToLibrary(newBook);
         
-        form.reset();
-        modal.classList.remove("active");
+        closeModal();
     }
 }
