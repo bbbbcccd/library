@@ -1,6 +1,7 @@
 const bookContainer = document.querySelector(".book-container");
 const addBookBtn = document.querySelector("#add-book-btn");
 const modal = document.querySelector(".modal");
+const formBtn = document.querySelector("#form-btn");
 
 let myLibrary = [];
 
@@ -108,3 +109,27 @@ bookContainer.addEventListener("click", (e) => {
         myLibrary[bookIndex].changeRead();
     }
 });
+
+formBtn.addEventListener("click", createBookfromForm);
+
+// Check validity of form
+// Create new book from form data and add to myLibrary
+// Reset the form and modal
+function createBookfromForm(e) {
+    e.preventDefault();
+    const form = e.target.parentNode;
+    if (!form.checkValidity()) {
+        form.reportValidity();
+    } else {
+        let title = form.elements["title"].value;
+        let author = form.elements["author"].value;
+        let pages = form.elements["pages"].value;
+        let isRead = form.elements["isRead"].checked;
+
+        const newBook = new Book(title, author, pages, isRead);
+        addBookToLibrary(newBook);
+        
+        form.reset();
+        modal.classList.remove("active");
+    }
+}
