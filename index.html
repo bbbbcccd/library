@@ -20,20 +20,20 @@
     <div class="modal">
         <form action="" method="GET">
             <label for="title">Book Title</label>
-            <input type="text" id="title" name="title" maxlength="100">
+            <input type="text" id="title" name="title" maxlength="100" required>
 
             <label for="author">Author</label>
-            <input type="text" id="author" name="text" maxlength="100">
+            <input type="text" id="author" name="text" maxlength="100" required>
 
             <label for="pages">Number of Pages</label>
-            <input type="number" id="pages" name="pages" min="1" max="30000">
+            <input type="number" id="pages" name="pages" min="1" max="30000" required>
 
             <div>
                 <input type="checkbox" id="isRead"  name="isRead" checked>
                 <label for="isRead">Finished reading the book</label>
             </div> 
             
-            <button type="submit">ADD BOOK</button>
+            <button type="submit" id="form-btn">ADD BOOK</button>
         </form>
     </div>
 </body>
